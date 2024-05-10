@@ -1,0 +1,36 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Project 0803"
+run/main_scene="res://Scenes/Level scenes/main_level.tscn"
+config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/image="res://Sprites/Characters/flower2.png"
+config/icon="res://Sprites/Characters/flower2.png"
+
+[autoload]
+
+Global="*res://Script/Save load scripts/Global.gd"
+Transition="*res://Scenes/Level scenes/transition.tscn"
+
+[display]
+
+window/stretch/mode="viewport"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/AS2P/plugin.cfg")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://6qnse6b2xv7f"]
+
+[ext_resource type="Script" path="res://Script/Flower scripts/growth_bar.gd" id="1_3mxse"]
+[ext_resource type="AudioStream" uid="uid://camknw8w3bjic" path="res://Sounds/Selected/Levelup.wav" id="2_hbm1b"]
+
+[node name="Growth bar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_3mxse")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -181.0
+offset_top = -52.0
+offset_right = 183.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(181, 15)
+mouse_filter = 1
+step = 1.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -78.0
+offset_right = 25.0
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+text = "Level: xx"
+
+[node name="LevelUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hbm1b")
+volume_db = 24.0
+pitch_scale = 1.53

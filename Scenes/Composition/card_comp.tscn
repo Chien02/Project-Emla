@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bi5qp0asm5ob0"]
+
+[ext_resource type="Script" path="res://Script/Compositions/card_comp.gd" id="1_aro3f"]
+[ext_resource type="Texture2D" uid="uid://b4tyrwhu4bfu3" path="res://Sprites/Others/CardTmp.jpg" id="1_tckxt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mp0yy"]
+size = Vector2(56, 78)
+
+[sub_resource type="Animation" id="Animation_mkx76"]
+resource_name = "drag"
+length = 0.5
+
+[sub_resource type="Animation" id="Animation_y3daf"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xi7ig"]
+_data = {
+"RESET": SubResource("Animation_y3daf"),
+"drag": SubResource("Animation_mkx76")
+}
+
+[node name="Card comp" type="Area2D"]
+script = ExtResource("1_aro3f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mp0yy")
+
+[node name="Background sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_tckxt")
+
+[node name="Plant sprite" type="Sprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xi7ig")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

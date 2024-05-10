@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=3 uid="uid://drqtp5ps01rd1"]
+
+[ext_resource type="Script" path="res://Scenes/loading_scene.gd" id="1_2hl8e"]
+[ext_resource type="Texture2D" uid="uid://0akjt5gydpk3" path="res://Sprites/loading.png" id="1_2k5rs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apbsx"]
+atlas = ExtResource("1_2k5rs")
+region = Rect2(0, 0, 800, 450)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6yms"]
+atlas = ExtResource("1_2k5rs")
+region = Rect2(800, 0, 800, 450)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcojt"]
+atlas = ExtResource("1_2k5rs")
+region = Rect2(1600, 0, 800, 450)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67cke"]
+atlas = ExtResource("1_2k5rs")
+region = Rect2(2400, 0, 800, 450)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m4ku4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apbsx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6yms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcojt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67cke")
+}],
+"loop": true,
+"name": &"loading",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_4p3lf"]
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["loading"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dxxio"]
+_data = {
+"loading": SubResource("Animation_4p3lf")
+}
+
+[node name="LoadingScene" type="Node2D"]
+script = ExtResource("1_2hl8e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(558, 318)
+scale = Vector2(1.57168, 1.44911)
+sprite_frames = SubResource("SpriteFrames_m4ku4")
+animation = &"loading"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dxxio")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

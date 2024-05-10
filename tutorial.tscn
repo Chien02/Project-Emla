@@ -1,0 +1,196 @@
+[gd_scene load_steps=17 format=3 uid="uid://dy08kf03cd12f"]
+
+[ext_resource type="Script" path="res://Script/Tutorial/tutorial.gd" id="1_fnibx"]
+[ext_resource type="Texture2D" uid="uid://c5byitxwu7u7u" path="res://Sprites/Others/pointer.png" id="2_wyns1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ay6ii"]
+size = Vector2(28.5, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3cake"]
+atlas = ExtResource("2_wyns1")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt61x"]
+atlas = ExtResource("2_wyns1")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vdufj"]
+atlas = ExtResource("2_wyns1")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frsbo"]
+atlas = ExtResource("2_wyns1")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qhna"]
+atlas = ExtResource("2_wyns1")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2eikd"]
+atlas = ExtResource("2_wyns1")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijwe6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3cake")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt61x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vdufj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frsbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qhna")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2eikd")
+}],
+"loop": true,
+"name": &"pointat",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_fc8pk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Text:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0872665]
+}
+
+[sub_resource type="Animation" id="Animation_t6meh"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["pointat"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f6hjt"]
+_data = {
+"RESET": SubResource("Animation_fc8pk"),
+"pointat": SubResource("Animation_t6meh")
+}
+
+[sub_resource type="Animation" id="Animation_t2uby"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Text:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ox46u"]
+resource_name = "wickle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Text:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mbw6g"]
+_data = {
+"RESET": SubResource("Animation_t2uby"),
+"wickle": SubResource("Animation_ox46u")
+}
+
+[node name="Tutorial" type="Area2D" node_paths=PackedStringArray("text", "animation", "text_animation", "text_marker")]
+texture_filter = 1
+collision_layer = 19
+collision_mask = 19
+script = ExtResource("1_fnibx")
+text = NodePath("Control/Text")
+animation = NodePath("Sprite animation")
+text_animation = NodePath("Text animation")
+text_marker = NodePath("Text marker")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ay6ii")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(15, -20)
+sprite_frames = SubResource("SpriteFrames_ijwe6")
+animation = &"pointat"
+
+[node name="Sprite animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f6hjt")
+}
+
+[node name="Text animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mbw6g")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Text" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 67.0
+offset_right = 266.0
+offset_bottom = 90.0
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(55, 11)
+text = "Click to boom!"
+
+[node name="Text marker" type="Marker2D" parent="."]
+position = Vector2(-25, -68)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]

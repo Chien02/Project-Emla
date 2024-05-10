@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3 uid="uid://fppju1a4jd14"]
+
+[ext_resource type="Script" path="res://Script/Level scenes/vitory.gd" id="1_kna2f"]
+[ext_resource type="Texture2D" uid="uid://t7fdipv2d8ni" path="res://icon.svg" id="2_twlqn"]
+[ext_resource type="AudioStream" uid="uid://dk0hlyvwggtil" path="res://Sounds/Selected/Close.wav" id="3_hybk8"]
+
+[node name="Vitory" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kna2f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 0.396078)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -295.0
+offset_top = -162.0
+offset_right = 25.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.72811, 1.87733)
+texture = ExtResource("2_twlqn")
+
+[node name="Win" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -32.0
+offset_right = 11.0
+offset_bottom = -8.99997
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.46595, 1.92353)
+text = "Success!"
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 23.0
+offset_right = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Replay"
+
+[node name="Menu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 67.0
+offset_right = 18.0
+offset_bottom = 98.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Menu"
+
+[node name="Score" type="Label" parent="."]
+layout_mode = 0
+offset_left = 338.0
+offset_top = 210.0
+offset_right = 386.0
+offset_bottom = 233.0
+text = "Score:"
+
+[node name="Highscore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 337.0
+offset_top = 236.0
+offset_right = 419.0
+offset_bottom = 259.0
+text = "Highscore:"
+
+[node name="Select" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("3_hybk8")
+volume_db = 24.0
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="button_down" from="Restart" to="." method="_on_restart_button_down"]
+[connection signal="button_down" from="Menu" to="." method="_on_menu_button_down"]

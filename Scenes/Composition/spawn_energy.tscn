@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://i3ak0bphk3ga"]
+
+[ext_resource type="Script" path="res://Script/Compositions/spawn_energy.gd" id="1_63nqs"]
+
+[node name="Spawn Energy" type="Node2D"]
+script = ExtResource("1_63nqs")
+can_spawn_mys = false
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="TimerMysth" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerMysth" to="." method="_on_timer_mysth_timeout"]

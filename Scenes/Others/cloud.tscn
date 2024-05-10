@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkhongu7rh46k"]
+
+[ext_resource type="Texture2D" uid="uid://cmfwbnan14w67" path="res://Sprites/Tile (background)/cloud.png" id="1_66ve6"]
+[ext_resource type="Script" path="res://Script/Other scripts/moving_cloud.gd" id="2_06hbn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axfis"]
+atlas = ExtResource("1_66ve6")
+region = Rect2(0, 0, 1200, 450)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qhfle"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axfis")
+}],
+"loop": true,
+"name": &"cloud",
+"speed": 5.0
+}]
+
+[node name="Cloud" type="AnimatedSprite2D"]
+position = Vector2(360, 0)
+sprite_frames = SubResource("SpriteFrames_qhfle")
+animation = &"cloud"
+script = ExtResource("2_06hbn")
+middle_way = 400
+death_way = 800

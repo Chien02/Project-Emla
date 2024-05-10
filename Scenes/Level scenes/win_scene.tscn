@@ -1,0 +1,237 @@
+[gd_scene load_steps=19 format=3 uid="uid://jds44fnbpunh"]
+
+[ext_resource type="Script" path="res://Script/Level scenes/win_scene.gd" id="1_upnsb"]
+[ext_resource type="Texture2D" uid="uid://f3m5vk2byt8" path="res://Sprites/Tile (background)/win_scene.png" id="2_cde0e"]
+[ext_resource type="Texture2D" uid="uid://bssjkw47mx4k3" path="res://Sprites/Tile (background)/cloud_win_scene.png" id="3_g8uhq"]
+[ext_resource type="Script" path="res://Script/Other scripts/moving_cloud.gd" id="4_i6gpb"]
+[ext_resource type="PackedScene" uid="uid://fppju1a4jd14" path="res://Scenes/Level scenes/vitory.tscn" id="5_lmntu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8a14"]
+atlas = ExtResource("2_cde0e")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pymsc"]
+atlas = ExtResource("2_cde0e")
+region = Rect2(320, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qswi"]
+atlas = ExtResource("2_cde0e")
+region = Rect2(640, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnjej"]
+atlas = ExtResource("2_cde0e")
+region = Rect2(960, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_853og"]
+atlas = ExtResource("2_cde0e")
+region = Rect2(1280, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17b8w"]
+atlas = ExtResource("2_cde0e")
+region = Rect2(1600, 0, 320, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cd5rk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t8a14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pymsc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2qswi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnjej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_853og")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17b8w")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Animation_rostg"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Backgound:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Backgound:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["idle"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bnwu6"]
+_data = {
+"idle": SubResource("Animation_rostg")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjdmh"]
+atlas = ExtResource("3_g8uhq")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c1yd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjdmh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_hh55d"]
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Clouds:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Clouds:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["idle"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dkegn"]
+_data = {
+"idle": SubResource("Animation_hh55d")
+}
+
+[node name="Win Scene" type="Node2D" node_paths=PackedStringArray("cloud_anim", "bg_anim", "cloud1", "cloud2", "cloud3", "bg", "dead_potision", "start_position")]
+texture_filter = 1
+script = ExtResource("1_upnsb")
+cloud_anim = NodePath("CloudAnim")
+bg_anim = NodePath("BackgroundAnim")
+cloud1 = NodePath("Clouds")
+cloud2 = NodePath("Clouds2")
+cloud3 = NodePath("Clouds3")
+bg = NodePath("Backgound")
+dead_potision = NodePath("Dead")
+start_position = NodePath("Start")
+
+[node name="Backgound" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cd5rk")
+animation = &"idle"
+
+[node name="BackgroundAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bnwu6")
+}
+
+[node name="Clouds" type="AnimatedSprite2D" parent="."]
+position = Vector2(-320, 0)
+sprite_frames = SubResource("SpriteFrames_c1yd4")
+animation = &"idle"
+script = ExtResource("4_i6gpb")
+
+[node name="Clouds2" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_c1yd4")
+animation = &"idle"
+script = ExtResource("4_i6gpb")
+
+[node name="Clouds3" type="AnimatedSprite2D" parent="."]
+position = Vector2(320, 0)
+sprite_frames = SubResource("SpriteFrames_c1yd4")
+animation = &"idle"
+script = ExtResource("4_i6gpb")
+
+[node name="CloudAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_dkegn")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.64, 3.64)
+
+[node name="Start" type="Marker2D" parent="."]
+position = Vector2(-320, 0)
+
+[node name="Dead" type="Marker2D" parent="."]
+position = Vector2(640, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Wish" type="Label" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 376.0
+offset_top = 187.0
+offset_right = 759.0
+offset_bottom = 234.0
+pivot_offset = Vector2(185, 23)
+theme_override_font_sizes/font_size = 34
+text = "Cảm ơn em vì đã vất vả"
+horizontal_alignment = 1
+
+[node name="Wish2" type="Label" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 335.0
+offset_top = 238.0
+offset_right = 786.0
+offset_bottom = 285.0
+pivot_offset = Vector2(227, 25)
+theme_override_font_sizes/font_size = 34
+text = "Hãy sống thật rạng rời nhé!"
+horizontal_alignment = 1
+
+[node name="Vitory" parent="CanvasLayer/Control" instance=ExtResource("5_lmntu")]
+process_mode = 3
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+offset_left = -1.0
+offset_right = -1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

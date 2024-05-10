@@ -1,0 +1,409 @@
+[gd_scene load_steps=39 format=3 uid="uid://se5a44ojnvby"]
+
+[ext_resource type="Script" path="res://Script/Level scenes/Main Level.gd" id="1_swxyn"]
+[ext_resource type="Texture2D" uid="uid://chlqqo16xo55b" path="res://Sprites/Tile (background)/background.png" id="2_i0shm"]
+[ext_resource type="Script" path="res://Script/Other scripts/MainCamera.gd" id="2_n1g8s"]
+[ext_resource type="PackedScene" uid="uid://28oqbigxnq08" path="res://Scenes/Flower/flower.tscn" id="3_7388g"]
+[ext_resource type="Script" path="res://Script/Other scripts/Background.gd" id="3_frdd4"]
+[ext_resource type="PackedScene" uid="uid://kaw2cbgoh2jm" path="res://Scenes/Composition/spawn_worm.tscn" id="5_f5cck"]
+[ext_resource type="PackedScene" uid="uid://i3ak0bphk3ga" path="res://Scenes/Composition/spawn_energy.tscn" id="6_7u3e2"]
+[ext_resource type="PackedScene" uid="uid://g0nomrwg6upr" path="res://Scenes/Level scenes/level_scene_ui.tscn" id="6_n3fkj"]
+[ext_resource type="PackedScene" uid="uid://c0hjlreejnlrq" path="res://Scenes/Level scenes/game_over.tscn" id="9_5187l"]
+[ext_resource type="PackedScene" uid="uid://bku3h0enunjvy" path="res://Scenes/Flower/flower_health.tscn" id="10_oko22"]
+[ext_resource type="PackedScene" uid="uid://dik4crm43xxnq" path="res://Scenes/Level scenes/pause_scene.tscn" id="11_ksicw"]
+[ext_resource type="AudioStream" uid="uid://cwy3wrs1t0xtn" path="res://Sounds/Selected/Open.wav" id="12_ldbxl"]
+[ext_resource type="AudioStream" uid="uid://dk0hlyvwggtil" path="res://Sounds/Selected/Close.wav" id="13_bxva4"]
+[ext_resource type="AudioStream" uid="uid://dwydncv2rohax" path="res://Sounds/Selected/Loss.wav" id="14_baneh"]
+[ext_resource type="AudioStream" uid="uid://b5sqc5i7phc70" path="res://Sounds/Selected/Select.mp3" id="15_houkg"]
+[ext_resource type="AudioStream" uid="uid://csljk0l5v0mtv" path="res://Sounds/Selected/Win.wav" id="16_1yn6n"]
+[ext_resource type="PackedScene" uid="uid://dgdonxxj103ho" path="res://Scenes/Level scenes/start_scene.tscn" id="17_31oge"]
+[ext_resource type="Texture2D" uid="uid://bu13h7p8rnn01" path="res://Sprites/Others/warning.png" id="18_q4avn"]
+[ext_resource type="PackedScene" uid="uid://bkkyrxrcrflps" path="res://Scenes/Level scenes/mystery_scene.tscn" id="19_0e7wh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13syd"]
+atlas = ExtResource("2_i0shm")
+region = Rect2(0, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mijga"]
+atlas = ExtResource("2_i0shm")
+region = Rect2(320, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jw20p"]
+atlas = ExtResource("2_i0shm")
+region = Rect2(640, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kfit"]
+atlas = ExtResource("2_i0shm")
+region = Rect2(960, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0a6n"]
+atlas = ExtResource("2_i0shm")
+region = Rect2(1280, 0, 320, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bq55"]
+atlas = ExtResource("2_i0shm")
+region = Rect2(1600, 0, 320, 180)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_34upr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13syd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mijga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jw20p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kfit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0a6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bq55")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="Animation" id="Animation_k7wx0"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BGAnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BGAnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_heks2"]
+_data = {
+"default": SubResource("Animation_k7wx0")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b5rg"]
+atlas = ExtResource("18_q4avn")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkvge"]
+atlas = ExtResource("18_q4avn")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p43i3"]
+atlas = ExtResource("18_q4avn")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ww5qi"]
+atlas = ExtResource("18_q4avn")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43nms"]
+atlas = ExtResource("18_q4avn")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ws0y6"]
+atlas = ExtResource("18_q4avn")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fa8im"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b5rg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkvge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p43i3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ww5qi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43nms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ws0y6")
+}],
+"loop": true,
+"name": &"warning",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_l5igo"]
+resource_name = "RESET"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Warning anim:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_6ay1a"]
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Warning anim:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Warning anim:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["warning"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8110g"]
+_data = {
+"RESET": SubResource("Animation_l5igo"),
+"warning": SubResource("Animation_6ay1a")
+}
+
+[node name="Main Level" type="Node2D"]
+process_mode = 1
+texture_filter = 1
+script = ExtResource("1_swxyn")
+pos_1 = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(1, -210),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+
+pos_2 = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-361, -2),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+
+pos_3 = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 212),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+
+pos_4 = Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(370, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+
+mys = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":3,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 0),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":4,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":1,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 82),"rotation":0.0,"scale":Vector2(2, 2),"skew":0.0,"script":Resource("res://Script/mystery_scene.gd"),"marker":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, -41),"rotation":0.0,"scale":Vector2(0.5, 0.5),"skew":0.0,"gizmo_extents":10.0,"script":null)
+,"reset_marker":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0.5, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+)
+
+
+[node name="MainCamera" type="Camera2D" parent="." node_paths=PackedStringArray("marker")]
+zoom = Vector2(1.75, 1.75)
+script = ExtResource("2_n1g8s")
+marker = NodePath("../Markers/Camera marker")
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("3_frdd4")
+
+[node name="BGAnimatedSprite2D" type="AnimatedSprite2D" parent="Background"]
+scale = Vector2(2.053, 2.053)
+sprite_frames = SubResource("SpriteFrames_34upr")
+frame_progress = 0.381047
+
+[node name="BGAnimatedSprite2D2" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(657, 0)
+scale = Vector2(2.053, 2.053)
+sprite_frames = SubResource("SpriteFrames_34upr")
+frame = 3
+frame_progress = 0.316497
+
+[node name="BGAnimatedSprite2D3" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(-1947, 0)
+scale = Vector2(2.053, 2.053)
+sprite_frames = SubResource("SpriteFrames_34upr")
+frame = 3
+frame_progress = 0.316497
+
+[node name="BGAnimatedSprite2D4" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(-655, 0)
+scale = Vector2(2.053, 2.053)
+sprite_frames = SubResource("SpriteFrames_34upr")
+frame = 3
+frame_progress = 0.316497
+
+[node name="BGAnimatedSprite2D5" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(-1309, 0)
+scale = Vector2(2.053, 2.053)
+sprite_frames = SubResource("SpriteFrames_34upr")
+frame = 3
+frame_progress = 0.316497
+
+[node name="BGAnimationPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+"": SubResource("AnimationLibrary_heks2")
+}
+
+[node name="Flower" parent="." node_paths=PackedStringArray("health", "main_scene") instance=ExtResource("3_7388g")]
+position = Vector2(-4, -2)
+scale = Vector2(2.06516, 2.00435)
+health = NodePath("Flower health")
+main_scene = NodePath("..")
+
+[node name="Flower health" parent="Flower" instance=ExtResource("10_oko22")]
+offset_left = 0.484224
+offset_top = -26.9414
+offset_right = 0.484224
+offset_bottom = -26.9414
+scale = Vector2(0.276538, 0.290776)
+
+[node name="Spawn worm" parent="." instance=ExtResource("5_f5cck")]
+process_mode = 3
+main_scene = Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":1,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":1,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"script":ExtResource("1_swxyn"),"pos_1":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(1, -210),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+,"pos_2":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(-361, -2),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+,"pos_3":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 212),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+,"pos_4":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(370, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+,"mys":Object(Node2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":3,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 0),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":4,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":1,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 82),"rotation":0.0,"scale":Vector2(2, 2),"skew":0.0,"script":Resource("res://Script/mystery_scene.gd"),"marker":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, -41),"rotation":0.0,"scale":Vector2(0.5, 0.5),"skew":0.0,"gizmo_extents":10.0,"script":null)
+,"reset_marker":Object(Marker2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0.5, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"gizmo_extents":10.0,"script":null)
+)
+)
+
+
+[node name="Spawn position" type="Node" parent="."]
+
+[node name="pos" type="Marker2D" parent="Spawn position"]
+position = Vector2(1, -210)
+
+[node name="pos2" type="Marker2D" parent="Spawn position"]
+position = Vector2(-361, -2)
+
+[node name="pos3" type="Marker2D" parent="Spawn position"]
+position = Vector2(0, 212)
+
+[node name="pos4" type="Marker2D" parent="Spawn position"]
+position = Vector2(370, 0)
+
+[node name="Spawn Energy" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("6_7u3e2")]
+main_scene = NodePath("..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Level Scene UI" parent="CanvasLayer" node_paths=PackedStringArray("main_scene", "flower_health", "paused_scene") instance=ExtResource("6_n3fkj")]
+offset_left = -11.0
+offset_top = -10.0
+offset_right = -11.0
+offset_bottom = -10.0
+main_scene = NodePath("../..")
+flower_health = NodePath("../../Flower/Flower health")
+paused_scene = NodePath("../Pause scene")
+
+[node name="Game Over" parent="CanvasLayer" instance=ExtResource("9_5187l")]
+visible = false
+
+[node name="Pause scene" parent="CanvasLayer" instance=ExtResource("11_ksicw")]
+visible = false
+
+[node name="PauseButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -117.0
+offset_top = 41.0
+offset_right = -52.0
+offset_bottom = 72.0
+grow_horizontal = 0
+scale = Vector2(1.19173, 1.23283)
+text = "Paused"
+
+[node name="Audio" type="Node2D" parent="."]
+process_mode = 3
+
+[node name="Open" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("12_ldbxl")
+volume_db = 24.0
+pitch_scale = 0.88
+
+[node name="Close" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("13_bxva4")
+volume_db = 24.0
+
+[node name="Loss" type="AudioStreamPlayer2D" parent="Audio"]
+process_mode = 3
+stream = ExtResource("14_baneh")
+volume_db = 6.0
+
+[node name="Select" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("15_houkg")
+volume_db = 18.0
+
+[node name="Win" type="AudioStreamPlayer2D" parent="Audio"]
+process_mode = 3
+stream = ExtResource("16_1yn6n")
+volume_db = 24.0
+pitch_scale = 1.93
+
+[node name="Tutorial" type="Node2D" parent="."]
+
+[node name="Tutor energy marker" type="Marker2D" parent="Tutorial"]
+position = Vector2(-96, -68)
+
+[node name="Tutor worm marker" type="Marker2D" parent="Tutorial"]
+position = Vector2(-1325, 2)
+
+[node name="Warning anim" type="AnimatedSprite2D" parent="Tutorial"]
+visible = false
+position = Vector2(-275, 1)
+sprite_frames = SubResource("SpriteFrames_fa8im")
+animation = &"warning"
+
+[node name="Tutorial player" type="AnimationPlayer" parent="Tutorial"]
+libraries = {
+"": SubResource("AnimationLibrary_8110g")
+}
+
+[node name="StartScene" parent="Tutorial" instance=ExtResource("17_31oge")]
+visible = false
+
+[node name="Markers" type="Node2D" parent="."]
+position = Vector2(0, 82)
+scale = Vector2(2, 2)
+
+[node name="ResetMarker" type="Marker2D" parent="Markers"]
+position = Vector2(0.5, 0)
+
+[node name="MysMarker" type="Marker2D" parent="Markers"]
+position = Vector2(0, -41)
+scale = Vector2(0.5, 0.5)
+
+[node name="Camera marker" type="Marker2D" parent="Markers"]
+position = Vector2(0, 0.5)
+scale = Vector2(0.5, 0.5)
+
+[node name="MysteryScene" parent="." node_paths=PackedStringArray("marker", "reset_marker") instance=ExtResource("19_0e7wh")]
+position = Vector2(0, 82)
+marker = NodePath("../Markers/MysMarker")
+reset_marker = NodePath("../Markers/ResetMarker")
+
+[connection signal="input_event" from="Flower" to="Flower" method="_on_input_event"]
+[connection signal="loss" from="Flower/Flower health" to="CanvasLayer/Level Scene UI" method="_on_flower_health_loss"]
+[connection signal="button_down" from="CanvasLayer/PauseButton" to="." method="_on_pause_button_button_down"]

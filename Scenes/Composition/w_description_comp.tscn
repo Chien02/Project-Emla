@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://su51grksdyi3"]
+
+[ext_resource type="Script" path="res://Script/Compositions/w_description_comp.gd" id="1_terce"]
+
+[node name="W_info_comp" type="Node2D"]
+script = ExtResource("1_terce")
