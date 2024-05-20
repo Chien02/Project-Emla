@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=3 uid="uid://00uhlo3kopx4"]
+
+[ext_resource type="Script" path="res://Scenes/animation/worm_animation.gd" id="1_aglox"]
+[ext_resource type="SpriteFrames" uid="uid://kbal6k2pgsue" path="res://Resources/SpriteFrames resource/worm_animation.tres" id="2_c0uqb"]
+[ext_resource type="SpriteFrames" uid="uid://c55b3pbt1j6or" path="res://Resources/SpriteFrames resource/explode_spritesheet.tres" id="3_f7vx2"]
+
+[sub_resource type="Animation" id="Animation_1uakv"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Worm Spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Worm Spritesheet:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["bite"]
+}
+
+[sub_resource type="Animation" id="Animation_drriu"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Worm Spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Worm Spritesheet:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["die"]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fx_boom"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wnvnl"]
+length = 0.75
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Worm Spritesheet:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Worm Spritesheet:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["moving"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t4hkm"]
+_data = {
+"bite": SubResource("Animation_1uakv"),
+"die": SubResource("Animation_drriu"),
+"moving": SubResource("Animation_wnvnl")
+}
+
+[node name="Worm Animation" type="Node2D" node_paths=PackedStringArray("worm_spritesheet", "shadow_spritesheet", "fx_spritesheet", "anim_player")]
+texture_filter = 1
+script = ExtResource("1_aglox")
+worm_spritesheet = NodePath("Worm Spritesheet")
+shadow_spritesheet = NodePath("Shadow Spritesheet")
+fx_spritesheet = NodePath("Fx spritesheet")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="Shadow Spritesheet" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.682353)
+position = Vector2(20, 20)
+scale = Vector2(1, 0.795)
+skew = 1.23046
+sprite_frames = ExtResource("2_c0uqb")
+animation = &"bite"
+
+[node name="Worm Spritesheet" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_c0uqb")
+animation = &"die"
+
+[node name="Fx spritesheet" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7, 0)
+scale = Vector2(1.925, 1.925)
+sprite_frames = ExtResource("3_f7vx2")
+frame = 32
+frame_progress = 1.0
+offset = Vector2(-1.03896, -12.4675)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t4hkm")
+}

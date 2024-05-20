@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d35a2wuy450qh"]
+
+[ext_resource type="Script" path="res://Script/Skills/skill.gd" id="1_mnsio"]
+
+[node name="Skill" type="Node2D" groups=["Skill"]]
+script = ExtResource("1_mnsio")

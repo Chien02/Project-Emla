@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpe71hvtb0fkt"]
+
+[ext_resource type="PackedScene" uid="uid://d35a2wuy450qh" path="res://Scenes/Skills/skill.tscn" id="1_n7pcj"]
+[ext_resource type="Script" path="res://Script/Skills/shoot.gd" id="2_ck7op"]
+
+[node name="Shoot" node_paths=PackedStringArray("timer") instance=ExtResource("1_n7pcj")]
+script = ExtResource("2_ck7op")
+timer = NodePath("Cooldown")
+anim_name = "shoot"
+skill_damage = 10
+
+[node name="Cooldown" type="Timer" parent="." index="0"]
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

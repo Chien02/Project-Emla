@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://bu66mcjn2uwar"]
+
+[ext_resource type="Script" path="res://Script/Worm scripts/Yellow worm.gd" id="1_6dx1n"]
+[ext_resource type="Resource" uid="uid://ywbulpdo78jf" path="res://Resources/Info resources/yellow_worm_info.tres" id="2_mqink"]
+[ext_resource type="AudioStream" uid="uid://c1f078loo423e" path="res://Sounds/Selected/Explosion.wav" id="2_tkxl2"]
+[ext_resource type="AudioStream" uid="uid://b5sqc5i7phc70" path="res://Sounds/Selected/Select.mp3" id="3_lp63l"]
+[ext_resource type="PackedScene" uid="uid://hgmhl5rm3rkk" path="res://Scenes/Skills/shoot_w.tscn" id="4_t3wrc"]
+[ext_resource type="Script" path="res://Scenes/Worm/YellowWormHealthComp.gd" id="5_mh1yg"]
+[ext_resource type="Script" path="res://Scenes/Worm/YellowWormMovementComp.gd" id="6_foc8r"]
+[ext_resource type="PackedScene" uid="uid://btv4hjqc07bou" path="res://Scenes/Worm/YellowWormAnimComp.tscn" id="7_fm3uw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jwtjh"]
+radius = 17.0054
+height = 119.989
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5abcc"]
+radius = 26.0129
+height = 99.9977
+
+[node name="YellowWorm" type="CharacterBody2D" node_paths=PackedStringArray("health", "movement_composition", "anim_composition", "explode_audio", "select_audio", "hitbox", "timer") groups=["Worm"]]
+scale = Vector2(1.35, 1.35)
+collision_layer = 2
+script = ExtResource("1_6dx1n")
+info = ExtResource("2_mqink")
+health = NodePath("Health Composition")
+movement_composition = NodePath("Movement Composition")
+anim_composition = NodePath("Animation Composition")
+explode_audio = NodePath("Explode")
+select_audio = NodePath("Select")
+hitbox = NodePath("Area2D")
+timer = NodePath("Timer")
+
+[node name="Animation Composition" parent="." instance=ExtResource("7_fm3uw")]
+
+[node name="Shoot-W" parent="." instance=ExtResource("4_t3wrc")]
+
+[node name="Health Composition" type="Node2D" parent="."]
+script = ExtResource("5_mh1yg")
+max_health = 30
+
+[node name="Movement Composition" type="Node2D" parent="."]
+script = ExtResource("6_foc8r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57214
+shape = SubResource("CapsuleShape2D_jwtjh")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = -1.57754
+shape = SubResource("CapsuleShape2D_5abcc")
+debug_color = Color(0.698039, 0.490196, 0.14902, 0.419608)
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_tkxl2")
+volume_db = 2.0
+pitch_scale = 1.5
+
+[node name="Select" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lp63l")
+volume_db = 2.0
+pitch_scale = 0.75
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

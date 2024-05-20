@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://cinfdemse07w1"]
+
+[ext_resource type="Script" path="res://Script/Sting/StingW.gd" id="1_nvxb5"]
+[ext_resource type="Texture2D" uid="uid://t5xg70o42dgc" path="res://Sprites/Items/sting.png" id="2_hi15w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmoge"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr0yo"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64eas"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xq2pu"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cd47w"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enunt"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_776m2"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kk4ml"]
+atlas = ExtResource("2_hi15w")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mrs4v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmoge")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rr0yo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64eas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xq2pu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cd47w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enunt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_776m2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kk4ml")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jedcw"]
+size = Vector2(51, 37)
+
+[node name="StingW" type="AnimatedSprite2D" node_paths=PackedStringArray("timer")]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_mrs4v")
+flip_h = true
+script = ExtResource("1_nvxb5")
+timer = NodePath("Timer")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_jedcw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

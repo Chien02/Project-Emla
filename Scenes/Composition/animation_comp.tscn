@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ykr0jqaqqx1b"]
 
 [ext_resource type="Script" path="res://Script/Compositions/animation_comp.gd" id="1_gd8t7"]
-[ext_resource type="SpriteFrames" uid="uid://eswcd2jfl05g" path="res://Resources/Card_spriteframes.tres" id="2_td8de"]
+[ext_resource type="SpriteFrames" uid="uid://eswcd2jfl05g" path="res://Resources/SpriteFrames resource/Card_spriteframes.tres" id="2_td8de"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_weoph"]
 graph_offset = Vector2(-58, -31)

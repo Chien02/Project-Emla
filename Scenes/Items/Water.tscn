@@ -1,0 +1,164 @@
+[gd_scene load_steps=16 format=3 uid="uid://brv1x7lxo5ase"]
+
+[ext_resource type="Script" path="res://Script/Items script/Water.gd" id="1_hyayj"]
+[ext_resource type="Texture2D" uid="uid://dfkdda6cmi0by" path="res://Sprites/Items/water.png" id="1_p2ufe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72loj"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8ghe"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1ryi"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq7w2"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qayx7"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_exg1x"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp221"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xin2u"]
+atlas = ExtResource("1_p2ufe")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vkwce"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72loj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8ghe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1ryi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq7w2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qayx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_exg1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mp221")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xin2u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbmyt"]
+size = Vector2(45.4312, 49.3274)
+
+[sub_resource type="Animation" id="Animation_chc1q"]
+resource_name = "jump"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.35, 0.45, 0.65, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.99666, 0.791808, 0.231454, 0.198627, 0.0348796, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.35, 0.5, 0.6, 0.65, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 20), Vector2(-62, 0), Vector2(-90, 3), Vector2(-112, 17), Vector2(-136, 74), Vector2(-145, 59), Vector2(-149, 74), Vector2(-153, 75)]
+}
+
+[sub_resource type="Animation" id="Animation_vdi6l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.99666]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-77, -85)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6c51n"]
+_data = {
+"RESET": SubResource("Animation_vdi6l"),
+"jump": SubResource("Animation_chc1q")
+}
+
+[node name="Water" type="AnimatedSprite2D" node_paths=PackedStringArray("anim_player") groups=["Item", "Water"]]
+z_index = 4
+texture_filter = 1
+position = Vector2(-77, -85)
+rotation = 1.99666
+sprite_frames = SubResource("SpriteFrames_vkwce")
+frame_progress = 0.223766
+script = ExtResource("1_hyayj")
+anim_player = NodePath("AnimationPlayer")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 255
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.201889, 4.38448)
+shape = SubResource("RectangleShape2D_nbmyt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6c51n")
+}
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

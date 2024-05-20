@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://154aruigmj2d"]
 
-[ext_resource type="PackedScene" uid="uid://bx0i4o7vsg4sn" path="res://Scenes/Worm/worm.tscn" id="1_ypsn7"]
-[ext_resource type="PackedScene" uid="uid://dy08kf03cd12f" path="res://tutorial.tscn" id="2_7yr35"]
+[ext_resource type="PackedScene" uid="uid://bx0i4o7vsg4sn" path="res://Scenes/Worm/Green worm.tscn" id="1_ypsn7"]
+[ext_resource type="PackedScene" uid="uid://dy08kf03cd12f" path="res://Script/Tutorial/tutorial.tscn" id="2_7yr35"]
 
 [node name="TutorialWorm" groups=["Tutorworm"] instance=ExtResource("1_ypsn7")]
 scale = Vector2(1.65, 1.65)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Worm_info" load_steps=2 format=3 uid="uid://dywc2wiq583mm"]
+
+[ext_resource type="Script" path="res://Resources/Info resources/worm_info.gd" id="1_r0c6c"]
+
+[resource]
+script = ExtResource("1_r0c6c")
+worm_name = "Green worm"
+color = "Green"
+damage = 15
+speed = 50
+description = "Kinda normal"

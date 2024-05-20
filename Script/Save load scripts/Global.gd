@@ -7,6 +7,8 @@ var tutorial : bool = false
 var start_text : bool = false
 var mystering : bool = false
 
+@onready var water : int = 0
+
 var win : bool = false # use for main menu
 var loss : bool = false
 
@@ -19,3 +21,6 @@ func set_highscore(_amount):
 	if (_amount > high_score):
 		high_score = _amount
 	return high_score
+
+func gain_water():
+	water += 1

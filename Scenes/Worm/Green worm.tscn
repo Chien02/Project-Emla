@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://bx0i4o7vsg4sn"]
+
+[ext_resource type="Script" path="res://Scenes/Worm/Green worm.gd" id="1_icecx"]
+[ext_resource type="Resource" uid="uid://dywc2wiq583mm" path="res://Resources/Info resources/green_worm_info.tres" id="2_36v4i"]
+[ext_resource type="PackedScene" uid="uid://00uhlo3kopx4" path="res://Scenes/animation/worm_animation.tscn" id="3_21h65"]
+[ext_resource type="Script" path="res://Scenes/Worm/GreenWormHealthComp.gd" id="4_uitke"]
+[ext_resource type="Script" path="res://Scenes/Worm/GreenMovementComp.gd" id="5_qgb8x"]
+[ext_resource type="AudioStream" uid="uid://c1f078loo423e" path="res://Sounds/Selected/Explosion.wav" id="6_vyo4e"]
+[ext_resource type="AudioStream" uid="uid://b5sqc5i7phc70" path="res://Sounds/Selected/Select.mp3" id="7_0ihgl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gl4oi"]
+radius = 17.0084
+height = 118.013
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3f6cq"]
+radius = 21.9999
+height = 94.0053
+
+[node name="Green worm" type="CharacterBody2D" node_paths=PackedStringArray("health", "movement_composition", "anim_composition", "explode_audio", "select_audio", "hitbox", "timer") groups=["Worm"]]
+texture_filter = 1
+scale = Vector2(1.35, 1.35)
+collision_layer = 7
+collision_mask = 0
+input_pickable = true
+script = ExtResource("1_icecx")
+info = ExtResource("2_36v4i")
+health = NodePath("Health Composition")
+movement_composition = NodePath("Movement Composition")
+anim_composition = NodePath("Worm Animation")
+explode_audio = NodePath("Explode")
+select_audio = NodePath("Select")
+hitbox = NodePath("Area2D")
+timer = NodePath("Timer")
+
+[node name="Worm Animation" parent="." instance=ExtResource("3_21h65")]
+
+[node name="Health Composition" type="Node2D" parent="."]
+script = ExtResource("4_uitke")
+max_health = 50
+
+[node name="Movement Composition" type="Node2D" parent="."]
+script = ExtResource("5_qgb8x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = -1.57989
+shape = SubResource("CapsuleShape2D_gl4oi")
+
+[node name="Area2D" type="Area2D" parent="."]
+show_behind_parent = true
+collision_layer = 7
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2.38419e-07, 4)
+rotation = -1.57362
+shape = SubResource("CapsuleShape2D_3f6cq")
+debug_color = Color(0.85098, 0.372549, 0.0235294, 0.419608)
+
+[node name="Select" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_0ihgl")
+volume_db = 2.0
+pitch_scale = 0.75
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_vyo4e")
+volume_db = 2.0
+pitch_scale = 1.5
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

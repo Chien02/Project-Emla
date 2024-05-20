@@ -12,19 +12,15 @@ func _process(_delta):
 func play_animation():
 	$AnimationPlayer.play("idle")
 
-func dead():
-	queue_free()
-
 func _on_timer_timeout():
 	if (name == "TutorialEnergy"): return
-	dead()
+	queue_free()
 
 func drag():
 	if (!hold):
 		$Timer.paused = false
 		return
 	$Hold.play() # play audio
-	$Hold.autoplay = true
 	$Timer.paused = true
 	var mouse_pos = get_global_mouse_position()
 	var tween = create_tween().set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT_IN)
@@ -34,12 +30,15 @@ func drag():
 func _on_area_2d_input_event(_viewport, event, _shape_idx):
 	if (event is InputEventMouseButton and event.pressed) or (event is InputEventScreenTouch and event.pressed):
 		hold = true
+		CustomCursorMouse.drag()
 	elif (event is InputEventMouseButton and !event.pressed) or (event is InputEventScreenTouch and !event.pressed):
 		hold = false
+		CustomCursorMouse.idle()
 
 func be_absorb():
 	$Absorded.play() # play audio
 	var tween = create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "scale", Vector2.ZERO, 0.5)
 	await $Absorded.finished
+
 

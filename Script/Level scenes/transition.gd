@@ -2,10 +2,10 @@ extends CanvasLayer
 # transition
 var next_scene
 
-func trans_in(next_scene):
+func trans_in(_next_scene):
 	$AnimatedSprite2D.visible = true
 	$AnimationPlayer.play("in")
-	self.next_scene = next_scene
+	self.next_scene = _next_scene
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://Scenes/loading_scene.tscn")
 	$AnimatedSprite2D.visible = false

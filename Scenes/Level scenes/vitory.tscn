@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://fppju1a4jd14"]
 
 [ext_resource type="Script" path="res://Script/Level scenes/vitory.gd" id="1_kna2f"]
-[ext_resource type="Texture2D" uid="uid://t7fdipv2d8ni" path="res://icon.svg" id="2_twlqn"]
+[ext_resource type="Texture2D" uid="uid://t7fdipv2d8ni" path="res://Sprites/Others/icon.svg" id="2_twlqn"]
 [ext_resource type="AudioStream" uid="uid://dk0hlyvwggtil" path="res://Sounds/Selected/Close.wav" id="3_hybk8"]
 
 [node name="Vitory" type="Control"]

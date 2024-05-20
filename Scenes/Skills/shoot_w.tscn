@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://hgmhl5rm3rkk"]
+
+[ext_resource type="Script" path="res://Script/Skills/shoot_w.gd" id="1_oo8ad"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bb1co"]
+size = Vector2(621, 55)
+
+[node name="Shoot-W" type="Node2D" node_paths=PackedStringArray("timer")]
+script = ExtResource("1_oo8ad")
+timer = NodePath("Timer")
+anim_name = "Shoot W"
+skill_damage = 30
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_bb1co")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

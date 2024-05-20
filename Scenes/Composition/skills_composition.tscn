@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2lhqi3t0vrop"]
+
+[ext_resource type="Script" path="res://Script/Compositions/skills_composition.gd" id="1_oai8p"]
+[ext_resource type="PackedScene" uid="uid://5emwrl7ei2au" path="res://Scenes/Skills/synthesis.tscn" id="2_skya7"]
+[ext_resource type="PackedScene" uid="uid://bpe71hvtb0fkt" path="res://Scenes/Skills/shoot.tscn" id="3_lgie6"]
+
+[node name="Skills Composition" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_oai8p")
+
+[node name="Synthesis" parent="." instance=ExtResource("2_skya7")]
+
+[node name="Shoot" parent="." instance=ExtResource("3_lgie6")]

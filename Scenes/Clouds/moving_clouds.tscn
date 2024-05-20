@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1lqfibf38eej"]
+
+[ext_resource type="Script" path="res://Script/Background/Moving Clouds.gd" id="1_q2ceb"]
+[ext_resource type="Texture2D" uid="uid://dwrjvqpay05mf" path="res://Sprites/Clouds/cloud1.png" id="2_kelts"]
+[ext_resource type="Texture2D" uid="uid://hhd5nl1rxm3h" path="res://Sprites/Clouds/cloud2.png" id="3_piqtr"]
+[ext_resource type="Texture2D" uid="uid://u11eey0yqwjx" path="res://Sprites/Clouds/cloud3.png" id="4_ahuiv"]
+
+[node name="Moving Clouds" type="Node2D"]
+script = ExtResource("1_q2ceb")
+
+[node name="Cloud1" type="Sprite2D" parent="."]
+position = Vector2(0, -192)
+texture = ExtResource("2_kelts")
+
+[node name="Cloud2" type="Sprite2D" parent="."]
+position = Vector2(-1152, -191)
+texture = ExtResource("3_piqtr")
+
+[node name="Cloud3" type="Sprite2D" parent="."]
+position = Vector2(-2279, -191)
+texture = ExtResource("4_ahuiv")
+
+[node name="StartMarker" type="Marker2D" parent="."]
+position = Vector2(-2279, -191)
+
+[node name="EndMarker" type="Marker2D" parent="."]
+position = Vector2(1158, -191)

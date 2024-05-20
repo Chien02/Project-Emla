@@ -1,0 +1,111 @@
+[gd_scene load_steps=15 format=3 uid="uid://b54wnoxn7kvps"]
+
+[ext_resource type="Texture2D" uid="uid://ci4sshfwasjde" path="res://Sprites/Mouse cusor/mousecursor.png" id="1_bo771"]
+[ext_resource type="Script" path="res://Scenes/Cursor Mouse/custom cursor mouse.gd" id="2_arw35"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klxyu"]
+atlas = ExtResource("1_bo771")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2swe"]
+atlas = ExtResource("1_bo771")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j73db"]
+atlas = ExtResource("1_bo771")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xr8uv"]
+atlas = ExtResource("1_bo771")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqgtb"]
+atlas = ExtResource("1_bo771")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj6x7"]
+atlas = ExtResource("1_bo771")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnmr3"]
+atlas = ExtResource("1_bo771")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ine6j"]
+atlas = ExtResource("1_bo771")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v43j1"]
+atlas = ExtResource("1_bo771")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfgjm"]
+atlas = ExtResource("1_bo771")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h85yu"]
+atlas = ExtResource("1_bo771")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lnv75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klxyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2swe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j73db")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xr8uv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqgtb")
+}],
+"loop": false,
+"name": &"click",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj6x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnmr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ine6j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v43j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfgjm")
+}],
+"loop": true,
+"name": &"drag",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h85yu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="CustomCursorMouse" type="AnimatedSprite2D"]
+z_index = 10
+texture_filter = 1
+position = Vector2(-11, -11)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_lnv75")
+animation = &"click"
+frame = 4
+frame_progress = 1.0
+offset = Vector2(11, 11)
+script = ExtResource("2_arw35")

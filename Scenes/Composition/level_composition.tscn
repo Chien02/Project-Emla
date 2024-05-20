@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://de0afl3ueat74"]
+
+[ext_resource type="Script" path="res://Script/Compositions/level_composition.gd" id="1_q32t5"]
+
+[node name="Level Composition" type="Node2D"]
+script = ExtResource("1_q32t5")
+max_level = 3
+max_exp = 100

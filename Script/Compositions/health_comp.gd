@@ -1,10 +1,11 @@
 extends Node2D
 
-class_name Health
+class_name Health_Composition
 
 @export var max_health : int
-var current_health : int
-var die : bool = false
+@export var current_health : int
+@export var die : bool = false
+
 signal dead
 
 func init_health():

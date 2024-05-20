@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://6qnse6b2xv7f" path="res://Scenes/Flower/growth_bar.tscn" id="1_n7r3k"]
 [ext_resource type="Script" path="res://Script/Level scenes/level_scene_ui.gd" id="1_qdc48"]
 
-[node name="Level UI" type="Control" node_paths=PackedStringArray("score_label", "growth_bar")]
+[node name="Level UI" type="Control" node_paths=PackedStringArray("score_label", "highscore_label")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 8
@@ -16,7 +16,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_qdc48")
 score_label = NodePath("Score")
-growth_bar = NodePath("Growth bar")
+highscore_label = NodePath("Highscore")
 
 [node name="Growth bar" parent="." instance=ExtResource("1_n7r3k")]
 layout_mode = 1

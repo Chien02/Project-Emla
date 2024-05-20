@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://dqyruikmbxmow"]
+
+[ext_resource type="AudioStream" uid="uid://c1f078loo423e" path="res://Sounds/Selected/Explosion.wav" id="1_2i44m"]
+[ext_resource type="PackedScene" uid="uid://bybbmhen2rirb" path="res://Scenes/Worm/RedWormAnimComp.tscn" id="1_55r4n"]
+[ext_resource type="Script" path="res://Scenes/Worm/Red worm.gd" id="1_bbjb4"]
+[ext_resource type="Script" path="res://Scenes/Worm/RedWormHealthComp.gd" id="1_litgc"]
+[ext_resource type="Resource" uid="uid://cq2cc7fa7w4ba" path="res://Resources/Info resources/red_worm_info.tres" id="2_g6go7"]
+[ext_resource type="Script" path="res://Scenes/Worm/RedWormMovementComp.gd" id="2_iyqy5"]
+[ext_resource type="AudioStream" uid="uid://b5sqc5i7phc70" path="res://Sounds/Selected/Select.mp3" id="2_s5gvj"]
+[ext_resource type="PackedScene" uid="uid://bk3uon60k33yt" path="res://Scenes/Skills/shield.tscn" id="3_i8gsh"]
+[ext_resource type="PackedScene" uid="uid://clact2eoo71iu" path="res://Scenes/Skills/spread.tscn" id="3_y0psm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14u45"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1pxnc"]
+radius = 27.4074
+height = 106.667
+
+[node name="Red worm" type="CharacterBody2D" node_paths=PackedStringArray("spread", "shield", "health", "movement_composition", "anim_composition", "explode_audio", "select_audio", "hitbox", "timer") groups=["Worm"]]
+scale = Vector2(1.4, 1.4)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_bbjb4")
+spread = NodePath("Spread")
+shield = NodePath("Shield")
+info = ExtResource("2_g6go7")
+health = NodePath("Health Composition")
+movement_composition = NodePath("Movement Composition")
+anim_composition = NodePath("RedWormAnimComp")
+explode_audio = NodePath("Explode")
+select_audio = NodePath("Select")
+hitbox = NodePath("Area2D")
+timer = NodePath("Timer")
+
+[node name="Shield" parent="." instance=ExtResource("3_i8gsh")]
+scale = Vector2(1, 1)
+
+[node name="Spread" parent="." instance=ExtResource("3_y0psm")]
+
+[node name="RedWormAnimComp" parent="." instance=ExtResource("1_55r4n")]
+
+[node name="Health Composition" type="Node2D" parent="."]
+script = ExtResource("1_litgc")
+max_health = 500
+
+[node name="Movement Composition" type="Node2D" parent="."]
+script = ExtResource("2_iyqy5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_14u45")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2.96296, 0.740741)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_1pxnc")
+
+[node name="Explode" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_2i44m")
+volume_db = 2.0
+pitch_scale = 1.5
+
+[node name="Select" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_s5gvj")
+volume_db = 2.0
+pitch_scale = 0.75
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -20,9 +20,11 @@ config/icon="res://Sprites/Characters/flower2.png"
 
 Global="*res://Script/Save load scripts/Global.gd"
 Transition="*res://Scenes/Level scenes/transition.tscn"
+CustomCursorMouse="*res://Scenes/Cursor Mouse/custom cursor mouse.tscn"
 
 [display]
 
+window/size/viewport_height=640
 window/stretch/mode="viewport"
 
 [editor_plugins]
